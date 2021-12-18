@@ -28,8 +28,8 @@ type='TREE'
 
 
 --— Load Tarantool mqtt
-local mqtt = require('mqtt')
-local json = require('json')
+mqtt = require('mqtt')
+json = require('json')
 
 --— Create instance
 connection = mqtt.new("client_id15623445", true)
@@ -41,7 +41,7 @@ connection:connect({host='194.67.112.161', port=1883})
 
 --— Set callback for recv new messages
 connection:on_message(function (message_id, topic, payload, gos, retain)
-local newdata = json.decode(payload)
+newdata = json.decode(payload)
 queue:insert({newdata.Day, newdata.TickTime, newdata.Speed})
 end)
 
